@@ -35,7 +35,6 @@ struct MenuItemsView: View {
                         .foregroundColor(.black)
                         .padding()
 
-                    // Sección de Ordenar Por
                     Text("Ordenar por")
                         .font(.title2)
                         .foregroundColor(.black)
@@ -52,7 +51,6 @@ struct MenuItemsView: View {
                     .cornerRadius(10)
                     .padding(.top)
 
-                    // Sección de Categorías Seleccionadas
                     Text("Categorías")
                         .font(.title2)
                         .foregroundColor(.black)
@@ -65,7 +63,6 @@ struct MenuItemsView: View {
                     }
                     .padding(.top)
 
-                    // Mostrar categorías seleccionadas
                     if selectedCategories.contains(.food) {
                         sectionView(title: "Comida", items: sortedItems(viewModel.foodItems), color: Color.blue)
                     }
@@ -111,7 +108,6 @@ struct MenuItemsView: View {
                 .foregroundColor(.black)
                 .padding(.top)
 
-            // 3 columnas en el LazyVGrid
             LazyVGrid(columns: [
                 GridItem(.flexible(), spacing: 15),
                 GridItem(.flexible(), spacing: 15),
@@ -124,7 +120,7 @@ struct MenuItemsView: View {
                                 .font(.system(size: 50))
                                 .frame(maxWidth: .infinity)
 
-                            Text(item.title) // Nombre del item
+                            Text(item.title) 
                                 .font(.headline)
                                 .foregroundColor(.black)
                                 .frame(maxWidth: .infinity)

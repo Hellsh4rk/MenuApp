@@ -24,7 +24,7 @@ class MenuItem: MenuItemProtocol, Identifiable {
     var category: MenuCategory
     var orderCount: Int
     var ingredients: [Ingredient]
-    var emoji: String // Nueva propiedad para los emojis
+    var emoji: String
     
     init(id: UUID = UUID(), price: Double, title: String, category: MenuCategory, orderCount: Int = 0, ingredients: [Ingredient], emoji: String) {
         self.id = id
@@ -33,7 +33,7 @@ class MenuItem: MenuItemProtocol, Identifiable {
         self.category = category
         self.orderCount = orderCount
         self.ingredients = ingredients
-        self.emoji = emoji // Inicializamos la propiedad emoji
+        self.emoji = emoji 
     }
 
     // Métodos getter y setter

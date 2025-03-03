@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MenuItemDetailView: View {
-    let menuItem: MenuItem // Recibe el menuItem al que se navega
+    let menuItem: MenuItem 
     
     var body: some View {
         VStack(spacing: 20) {

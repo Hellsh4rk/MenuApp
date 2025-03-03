@@ -7,7 +7,6 @@
 import Foundation
 
 enum Ingredient: CaseIterable {
-    // Ingredientes comunes para comidas
     case pasta
     case tomatoSauce
     case spinach
@@ -62,7 +61,6 @@ enum Ingredient: CaseIterable {
     case agaveSyrup
     case ice
     case mint
-    // Ingredientes faltantes
     case tomato
     case ketchup
     case spaghetti
@@ -142,7 +140,6 @@ enum Ingredient: CaseIterable {
         case .agaveSyrup: return "Jarabe de Agave"
         case .ice: return "Hielo"
         case .mint: return "Menta"
-        // Ingredientes faltantes
         case .tomato: return "Tomate"
         case .ketchup: return "Ketchup"
         case .spaghetti: return "Espaguetis"

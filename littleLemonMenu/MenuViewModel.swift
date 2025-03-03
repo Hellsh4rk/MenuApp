@@ -13,7 +13,6 @@ class MenuViewViewModel: ObservableObject {
     @Published var dessertItems: [MenuItem] = []
 
     init() {
-        // Inicialización de los elementos de comida con categorías asignadas
         foodItems = [
             MenuItem(price: 10, title: "Burger", category: .food, ingredients: [.beef, .lettuce, .tomato, .onion, .cheese, .ketchup], emoji: "🍔"),
             MenuItem(price: 15, title: "Pizza", category: .food, ingredients: [.dough, .tomatoSauce, .mozzarella, .pepperoni, .basil], emoji: "🍕"),
@@ -29,7 +28,6 @@ class MenuViewViewModel: ObservableObject {
             MenuItem(price: 11, title: "Vegetable Stir Fry", category: .food, ingredients: [.broccoli, .carrot, .onion, .pepper, .soySauce], emoji: "🥦🥕")
         ]
 
-        // Inicialización de los elementos de bebida con categorías asignadas
         drinkItems = [
             MenuItem(price: 3, title: "Coffee", category: .drinks, ingredients: [.coffeeBeans, .water], emoji: "☕"),
             MenuItem(price: 2, title: "Tea", category: .drinks, ingredients: [.teaLeaves, .hotWater], emoji: "🍵"),
@@ -41,7 +39,6 @@ class MenuViewViewModel: ObservableObject {
             MenuItem(price: 6, title: "Smoothie", category: .drinks, ingredients: [.berries, .banana, .yogurt], emoji: "🥤🍓")
         ]
 
-        // Inicialización de los elementos de postre con categorías asignadas
         dessertItems = [
             MenuItem(price: 6, title: "Cake", category: .desserts, ingredients: [.flour, .sugar, .eggs, .butter, .bakingPowder, .milk], emoji: "🎂"),
             MenuItem(price: 4, title: "Ice Cream", category: .desserts, ingredients: [.milk, .cream, .sugar, .vanilla], emoji: "🍦"),
