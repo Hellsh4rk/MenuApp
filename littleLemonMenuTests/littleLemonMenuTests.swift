@@ -8,29 +8,23 @@
 import XCTest
 @testable import littleLemonMenu
 
-final class littleLemonMenuTests: XCTestCase {
+class MenuItemTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    // Caso de prueba para verificar el título del elemento de menú
+    func testMenuItemTitle() {
+        // Crear un elemento de menú con un título específico
+        let menuItem = MenuItem(price: 10, title: "Burger", category: .food, ingredients: [.pasta, .tomatoSauce], emoji: "🍔")
+        
+        // Verificar que el título del elemento de menú es igual al valor esperado
+        XCTAssertEqual(menuItem.title, "Burger", "El título del elemento de menú debe ser igual al valor inicializado.")
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    // Caso de prueba para verificar los ingredientes del elemento de menú
+    func testMenuItemIngredients() {
+        // Crear un elemento de menú con ingredientes específicos
+        let menuItem = MenuItem(price: 10, title: "Burger", category: .food, ingredients: [.pasta, .tomatoSauce], emoji: "🍔")
+        
+        // Verificar que los ingredientes del elemento de menú son los esperados
+        XCTAssertEqual(menuItem.ingredients, [.pasta, .tomatoSauce], "Los ingredientes del elemento de menú deben ser iguales a los valores inicializados.")
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
 }
