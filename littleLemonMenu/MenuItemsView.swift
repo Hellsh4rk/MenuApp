@@ -16,7 +16,7 @@ struct MenuItemsView: View {
     func sortedItems(_ category: [MenuItem]) -> [MenuItem] {
         switch selectedSortOption {
         case "Más populares":
-            return category.sorted { $0.orderCount > $1.orderCount } // Cambié 'popularity' por 'orderCount'
+            return category.sorted { $0.orderCount > $1.orderCount }
         case "Precio $-$$$":
             return category.sorted { $0.price < $1.price }
         case "A-Z":
@@ -27,57 +27,60 @@ struct MenuItemsView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack {
-                Text("Menu")
-                    .font(.system(size: 40, weight: .bold))
-                    .foregroundColor(.black)
-                    .padding()
+        NavigationView {
+            ScrollView {
+                VStack {
+                    Text("Menu")
+                        .font(.system(size: 40, weight: .bold))
+                        .foregroundColor(.black)
+                        .padding()
 
-                // Sección de Ordenar Por
-                Text("Ordenar por")
-                    .font(.title2)
-                    .foregroundColor(.black)
+                    // Sección de Ordenar Por
+                    Text("Ordenar por")
+                        .font(.title2)
+                        .foregroundColor(.black)
+                        .padding(.top)
+
+                    Picker("Ordenar por", selection: $selectedSortOption) {
+                        Text("Más populares").tag("Más populares")
+                        Text("Precio $-$$$").tag("Precio $-$$$")
+                        Text("A-Z").tag("A-Z")
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding(.horizontal)
+                    .background(Color.gray.opacity(0.1))
+                    .cornerRadius(10)
                     .padding(.top)
 
-                Picker("Ordenar por", selection: $selectedSortOption) {
-                    Text("Más populares").tag("Más populares")
-                    Text("Precio $-$$$").tag("Precio $-$$$")
-                    Text("A-Z").tag("A-Z")
-                }
-                .pickerStyle(SegmentedPickerStyle())
-                .padding(.horizontal)
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(10)
-                .padding(.top)
+                    // Sección de Categorías Seleccionadas
+                    Text("Categorías")
+                        .font(.title2)
+                        .foregroundColor(.black)
+                        .padding(.top)
 
-                // Sección de Categorías Seleccionadas
-                Text("Categorías")
-                    .font(.title2)
-                    .foregroundColor(.black)
+                    HStack(spacing: 15) {
+                        categoryButton(title: "Comida", category: .food, color: Color.blue.opacity(0.5))
+                        categoryButton(title: "Bebida", category: .drinks, color: Color.green.opacity(0.5))
+                        categoryButton(title: "Postre", category: .desserts, color: Color.pink.opacity(0.5))
+                    }
                     .padding(.top)
 
-                HStack(spacing: 15) {
-                    categoryButton(title: "Comida", category: .food, color: Color.blue.opacity(0.5))
-                    categoryButton(title: "Bebida", category: .drinks, color: Color.green.opacity(0.5))
-                    categoryButton(title: "Postre", category: .desserts, color: Color.pink.opacity(0.5))
-                }
-                .padding(.top)
+                    // Mostrar categorías seleccionadas
+                    if selectedCategories.contains(.food) {
+                        sectionView(title: "Comida", items: sortedItems(viewModel.foodItems), color: Color.blue)
+                    }
 
-                // Mostrar categorías seleccionadas
-                if selectedCategories.contains(.food) {
-                    sectionView(title: "Comida", items: sortedItems(viewModel.foodItems), color: Color.blue)
-                }
+                    if selectedCategories.contains(.drinks) {
+                        sectionView(title: "Bebidas", items: sortedItems(viewModel.drinkItems), color: Color.green)
+                    }
 
-                if selectedCategories.contains(.drinks) {
-                    sectionView(title: "Bebidas", items: sortedItems(viewModel.drinkItems), color: Color.green)
+                    if selectedCategories.contains(.desserts) {
+                        sectionView(title: "Postres", items: sortedItems(viewModel.dessertItems), color: Color.pink)
+                    }
                 }
-
-                if selectedCategories.contains(.desserts) {
-                    sectionView(title: "Postres", items: sortedItems(viewModel.dessertItems), color: Color.pink)
-                }
+                .padding()
             }
-            .padding()
+            .navigationTitle("Menú")
         }
     }
 
@@ -115,20 +118,22 @@ struct MenuItemsView: View {
                 GridItem(.flexible(), spacing: 15)
             ], spacing: 15) {
                 ForEach(items, id: \.id) { item in
-                    VStack {
-                        Text(item.emoji) // Emoji como imagen
-                            .font(.system(size: 50))
-                            .frame(maxWidth: .infinity)
+                    NavigationLink(destination: MenuItemDetailView(menuItem: item)) {
+                        VStack {
+                            Text(item.emoji) // Emoji como imagen
+                                .font(.system(size: 50))
+                                .frame(maxWidth: .infinity)
 
-                        Text(item.title) // Nombre del item
-                            .font(.headline)
-                            .foregroundColor(.black)
-                            .frame(maxWidth: .infinity)
+                            Text(item.title) // Nombre del item
+                                .font(.headline)
+                                .foregroundColor(.black)
+                                .frame(maxWidth: .infinity)
+                        }
+                        .frame(height: 150)
+                        .background(color.opacity(0.2))
+                        .cornerRadius(10)
+                        .padding(.bottom, 10)
                     }
-                    .frame(height: 150)
-                    .background(color.opacity(0.2))
-                    .cornerRadius(10)
-                    .padding(.bottom, 10)
                 }
             }
         }
@@ -137,6 +142,8 @@ struct MenuItemsView: View {
 
 struct MenuItemsView_Previews: PreviewProvider {
     static var previews: some View {
-        MenuItemsView(viewModel: MenuViewViewModel())
+        NavigationView {
+            MenuItemsView(viewModel: MenuViewViewModel())
+        }
     }
 }
